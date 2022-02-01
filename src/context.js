@@ -29,7 +29,7 @@ const AppProvider = ({ children }) => {
     try {
       const response = await fetch(url);
       const data = await response.json();
-      console.log(data);
+
       dispatch({ type: SET_STORIES, payload: data });
     } catch (error) {
       console.log(error);
@@ -48,8 +48,8 @@ const AppProvider = ({ children }) => {
     dispatch({ type: HANDLE_SEARCH, payload: query });
   };
 
-  const handlePage = (page) => {
-    dispatch({ type: HANDLE_PAGE, payload: page });
+  const handlePage = (value) => {
+    dispatch({ type: HANDLE_PAGE, payload: value });
   };
 
   return (

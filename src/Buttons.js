@@ -2,21 +2,25 @@ import React from "react";
 import { useGlobalContext } from "./context";
 
 const Buttons = () => {
-  const { page, nbPages, handlePage } = useGlobalContext();
+  const { page, nbPages, handlePage, isLoading } = useGlobalContext();
 
   return (
     <div className="btn-container">
-      <button className="button" onClick={page === 0 ? null : page - 1}>
+      <button
+        disabled={isLoading}
+        className="button"
+        onClick={() => handlePage("dec")}>
         Prev
       </button>
       <h3>
         <p>
-          {page} of {nbPages}
+          {page + 1} of {nbPages}
         </p>
       </h3>
       <button
+        disabled={isLoading}
         className="button"
-        onClick={page === nbPages ? null : { page: page + 1 }}>
+        onClick={() => handlePage("inc")}>
         Next
       </button>
     </div>
