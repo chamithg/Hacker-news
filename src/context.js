@@ -38,15 +38,23 @@ const AppProvider = ({ children }) => {
 
   useEffect(() => {
     fetchStories(`${API_ENDPOINT}query=${state.query}&page=${state.page}`);
-  }, []);
+  }, [state.query, state.page]);
 
   const handleDelete = (objectID) => {
-    console.log(objectID);
     dispatch({ type: REMOVE_STORY, payload: objectID });
   };
 
+  const handleSearch = (query) => {
+    dispatch({ type: HANDLE_SEARCH, payload: query });
+  };
+
+  const handlePage = (page) => {
+    dispatch({ type: HANDLE_PAGE, payload: page });
+  };
+
   return (
-    <AppContext.Provider value={{ ...state, handleDelete }}>
+    <AppContext.Provider
+      value={{ ...state, handleDelete, handleSearch, handlePage }}>
       {children}
     </AppContext.Provider>
   );
